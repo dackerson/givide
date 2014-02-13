@@ -2,5 +2,7 @@ function OpenManager() {
   chrome.tabs.create({url:"manager.html"})
 }
 document.getElementById("managerBtn").onclick = OpenManager
-document.getElementById("newEntryTitle").value = document.title
+chrome.tabs.getSelected(function(tab){
+  document.getElementById("newEntryTitle").value = tab.title
+})
 document.getElementById("newEntryUrl").value = document.URL

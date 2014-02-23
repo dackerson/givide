@@ -4,5 +4,5 @@ function OpenManager() {
 document.getElementById("managerBtn").onclick = OpenManager
 chrome.tabs.getSelected(function(tab){
   document.getElementById("newEntryTitle").value = tab.title
+  document.getElementById("newEntryUrl").value = tab.url
 })
-document.getElementById("newEntryUrl").value = document.URL

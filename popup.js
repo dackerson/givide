@@ -7,13 +7,16 @@ chrome.tabs.getSelected(function(tab){
   document.getElementById("newEntryUrl").value = tab.url;
 })
 document.getElementById("newEntrySubmit").onclick = function(){
-  if (localStorage["entries"] == undefined) {
-    localStorage["entries"] = [];
-  }
   url = document.getElementById("newEntryUrl").value;
   title = document.getElementById("newEntryTitle").value;
-  localStorage["entries"] = {}
-  localStorage["entries"][url] = {
-    "title": title
-  };
+  entriesStr = localStorage["entries"]
+  if (entriesStr == undefined) {
+    entries = {};
+  }
+  else {
+    entries = JSON.parse(entriesStr);
+  }
+  console.log(JSON.stringify(entries));
+  entries[url] = title;
+  localStorage["entries"] = JSON.stringify(entries);
 };

@@ -1,14 +1,13 @@
-function OpenManager() {
+$("#managerBtn").click(function() {
   chrome.tabs.create({url:"manager.html"});
-};
-document.getElementById("managerBtn").onclick = OpenManager;
-chrome.tabs.getSelected(function(tab){
-  document.getElementById("newEntryTitle").value = tab.title;
-  document.getElementById("newEntryUrl").value = tab.url;
 });
-document.getElementById("newEntrySubmit").onclick = function(){
-  url = document.getElementById("newEntryUrl").value;
-  title = document.getElementById("newEntryTitle").value;
+chrome.tabs.getSelected(function(tab) {
+  $("#newEntryTitle").val(tab.title);
+  $("#newEntryUrl").val(tab.url);
+});
+$("#newEntrySubmit").click(function() {
+  url = $("#newEntryUrl").val();
+  title = $("#newEntryTitle").val();
   entriesStr = localStorage["entries"];
   if (entriesStr == undefined) {
     entries = {};
@@ -20,4 +19,4 @@ document.getElementById("newEntrySubmit").onclick = function(){
   entriesStr = JSON.stringify(entries);
   console.log("Debug -- new value of 'entries' is: " + entriesStr);
   localStorage["entries"] = entriesStr;
-};
+});
